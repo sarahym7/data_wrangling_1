@@ -154,4 +154,38 @@ pulse_df
 pulse_df = janitor::clean_names(pulse_df)
 ```
 
+## Comparison with Base R
+
+
+what about read.csv ? ->built into R and we dont have to load packages
+never use read.csv ever bc very different than read_csv 
+
+Heres why...
+
+```{r}
+litters_base = read.csv("data/FAS_litters.csv")
+litters_readr = read_csv("data/FAS_litters.csv")
+
+litters_base
+litters_readr
+
+
+```
+Notice that litters_base will translate spaces to dots wheareas readrs is more easy manage 
+the base is going to be more difficult to take a look at and the printed difference is the most obvious 
+- readr is quicker and more consistent with the tidyverse 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

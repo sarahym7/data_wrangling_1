@@ -154,3 +154,66 @@ when we print the litters_df function we will see that the group
 variable is a character, they are a mix of letters and numbers. A dbl is
 a particular kind of number, each column has numeric variables and the
 missing values are coded as NA.
+
+Additional options to read.csv -\> ?read_csv, there are various uses
+
+# Options to read CSV
+
+``` r
+litters_df = read_csv("./data/FAS_litters.csv", skip=10)
+```
+
+    ## New names:
+    ## Rows: 39 Columns: 8
+    ## ── Column specification
+    ## ──────────────────────────────────────────────────────── Delimiter: "," chr
+    ## (4): Con8, #3/5/2/2/95, 28.5, NA dbl (4): 20, 8...6, 0, 8...8
+    ## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+    ## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ## • `8` -> `8...6`
+    ## • `8` -> `8...8`
+
+noticed that we have 39x8 instead of 49x8, its skipped the first 10 rows
+and taken whatever the first column as varibales names so instead we’ll
+do
+
+``` r
+litters_df = read_csv("./data/FAS_litters.csv", skip=10, col_names = FALSE)
+```
+
+    ## Rows: 40 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (4): X1, X2, X3, X4
+    ## dbl (4): X5, X6, X7, X8
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+col_names=FALSE we use this to because we didn’t provide r with column
+names so it will just create its own skip and col_name is useful when
+the csv provided is strangely structure like the first row is not
+columns, or there are blank information in the rows , or there is a
+description in the dataset that sometimes gets included in the first few
+rows so we can skip some rows or be clear theb first row interested are
+not column names it comes from somewhere else.
+
+other example
+
+``` r
+litters_df = read_csv("./data/FAS_litters.csv", na = c("", "NA", 999))
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (4): Group, Litter Number, GD0 weight, GD18 weight
+    ## dbl (4): GD of Birth, Pups born alive, Pups dead @ birth, Pups survive
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Anytime it sees this, r knows that they are missing values
+
+now column types which are guessed by read_csv, reads the first 1000
+rows checkout `?read_csv()` for more info

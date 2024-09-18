@@ -34,6 +34,41 @@ to change the names we will use a certain function in a certain package -> janit
 
 ## Take a look at the data 
 
+Printing in the console.
+
+```{r}
+litters_df #running alone prints the data and see that the variables are now in snakecase
+
+```
+ 
+Can also use 
+
+```{r}
+
+head(litters_df) #gives you the first 6 rows
+
+```
+
+
+checking the tail gives you the info from the end
+```{r}
+tail(litters_df)
+```
+
+There are some gimick like the skimr. Gives you the min , max, histogram, just isnt used that frequent
+
+```{r}
+skimr::skim(litters_df)
+
+```
+
+View function, type in the console. will open a new window and allows to interact witht the dataset. Dont write view in the rmardown because can slow down the knitting.
+view(litters_df)
+
+
+
+when we print the litters_df function we will see that the group variable is a character, they are a mix of letters and numbers. A dbl is a particular kind of number, each column has numeric variables and the missing values are coded as NA. 
+
 
 
 

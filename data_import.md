@@ -460,3 +460,14 @@ Notice that litters_base will translate spaces to dots wheareas readrs
 is more easy manage the base is going to be more difficult to take a
 look at and the printed difference is the most obvious - readr is
 quicker and more consistent with the tidyverse
+
+## Exporting data
+
+want results of cleaned data to be exported
+
+so export the mlb subtable in write we have to tell it whats the thing
+we want to export and the path to give it
+
+``` r
+write_csv( mlb_df, "./data/mlb_subtable.csv")
+```

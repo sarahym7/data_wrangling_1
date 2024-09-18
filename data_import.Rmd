@@ -177,6 +177,14 @@ the base is going to be more difficult to take a look at and the printed differe
 
 
 
+## Exporting data 
+want results of cleaned data to be exported 
+
+so export the mlb subtable 
+in write we have to tell it whats the thing we want to export and the path to give it 
+```{r}
+write_csv( mlb_df, "./data/mlb_subtable.csv")
+```
 
 
 

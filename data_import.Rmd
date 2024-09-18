@@ -1,21 +1,41 @@
 ---
-title: "Simple document"
-output: html_document
+title: "Data Import"
+output: github_document
 ---
 
-I'm an R Markdown document! 
 
-# Section 1
+first load tidyverse library because the functions we are going to use exist in the package, more specific the readr
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
 
-```{r}
-samp = rnorm(100)
-length(samp)
+```{r setup}
+
+library(tidyverse)
+
 ```
 
-# Section 2
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+## Read in some data
+
+Read in the litters data set. FYI read_csv is a function that exists in the readr's package
+read_csv("write your relative path") so we read as "./from this starting point in folder datawrangling go to data folder and go into fas_litters.csv)
+
+```{r}
+
+litters_df = read_csv("./data/FAS_litters.csv")
+
+```
+
+Now cleaning data, this example has variables not in snakecase 
+```{r}
+litters_df= janitor::clean_names(litters_df)
+```
+
+to change the names we will use a certain function in a certain package -> janitor, we can also load package but doesnt matter bc we just want to use one function. 
+
+## Take a look at the data 
+
+
+
+
+
+

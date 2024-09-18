@@ -102,9 +102,56 @@ Anytime it sees this, r knows that they are missing values
 
 now column types which are guessed by read_csv, reads the first 1000 rows 
 checkout `?read_csv()` for more info 
+
+# New example
+
+We have two excel files that we want to import and read in so we will be using these functions 
+
+
+## Other file formats 
+Read in an excel file 
+1. create an mlb dataframe 
+2. load read excel package , can put at top so person knows which packages will be used 
+
+this is not in the readr package for csv but will function the same 
+we need to give it the relative path , .= starting from the project home folder, wherever project is go into the data folder and find this dataset 
+
 ```{r}
+
+library(readxl)
+
+mlb_df = read_excel("./data/mlb11.xlsx")
+
+mlb_df
 
 ```
 
+dataset is already good with variable names 
+
+FYI there are excel specific optionsin the read excel help file
+sheet = NULL,
+  range = NULL,
+you have to specify which sheet you want to draw information from and specify the range of values you want to import from the columns
+
+Example 
+
+```{r}
+read_excel("./data/mlb11.xlsx", range = "A1:F7")
+
+```
+
+
+#Reading in a SAS file
+
+
+```{r}
+library(haven) 
+
+pulse_df = read_sas("./data/public_pulse_data.sas7bdat")
+
+pulse_df
+
+pulse_df = janitor::clean_names(pulse_df)
+```
 
 

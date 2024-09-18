@@ -217,3 +217,94 @@ Anytime it sees this, r knows that they are missing values
 
 now column types which are guessed by read_csv, reads the first 1000
 rows checkout `?read_csv()` for more info
+
+# New example
+
+We have two excel files that we want to import and read in so we will be
+using these functions
+
+## Other file formats
+
+Read in an excel file 1. create an mlb dataframe 2. load read excel
+package , can put at top so person knows which packages will be used
+
+this is not in the readr package for csv but will function the same we
+need to give it the relative path , .= starting from the project home
+folder, wherever project is go into the data folder and find this
+dataset
+
+``` r
+library(readxl)
+
+mlb_df = read_excel("./data/mlb11.xlsx")
+
+mlb_df
+```
+
+    ## # A tibble: 30 × 12
+    ##    team        runs at_bats  hits homeruns bat_avg strikeouts stolen_bases  wins
+    ##    <chr>      <dbl>   <dbl> <dbl>    <dbl>   <dbl>      <dbl>        <dbl> <dbl>
+    ##  1 Texas Ran…   855    5659  1599      210   0.283        930          143    96
+    ##  2 Boston Re…   875    5710  1600      203   0.28        1108          102    90
+    ##  3 Detroit T…   787    5563  1540      169   0.277       1143           49    95
+    ##  4 Kansas Ci…   730    5672  1560      129   0.275       1006          153    71
+    ##  5 St. Louis…   762    5532  1513      162   0.273        978           57    90
+    ##  6 New York …   718    5600  1477      108   0.264       1085          130    77
+    ##  7 New York …   867    5518  1452      222   0.263       1138          147    97
+    ##  8 Milwaukee…   721    5447  1422      185   0.261       1083           94    96
+    ##  9 Colorado …   735    5544  1429      163   0.258       1201          118    73
+    ## 10 Houston A…   615    5598  1442       95   0.258       1164          118    56
+    ## # ℹ 20 more rows
+    ## # ℹ 3 more variables: new_onbase <dbl>, new_slug <dbl>, new_obs <dbl>
+
+dataset is already good with variable names
+
+FYI there are excel specific optionsin the read excel help file sheet =
+NULL, range = NULL, you have to specify which sheet you want to draw
+information from and specify the range of values you want to import from
+the columns
+
+Example
+
+``` r
+read_excel("./data/mlb11.xlsx", range = "A1:F7")
+```
+
+    ## # A tibble: 6 × 6
+    ##   team                 runs at_bats  hits homeruns bat_avg
+    ##   <chr>               <dbl>   <dbl> <dbl>    <dbl>   <dbl>
+    ## 1 Texas Rangers         855    5659  1599      210   0.283
+    ## 2 Boston Red Sox        875    5710  1600      203   0.28 
+    ## 3 Detroit Tigers        787    5563  1540      169   0.277
+    ## 4 Kansas City Royals    730    5672  1560      129   0.275
+    ## 5 St. Louis Cardinals   762    5532  1513      162   0.273
+    ## 6 New York Mets         718    5600  1477      108   0.264
+
+\#Reading in a SAS file
+
+``` r
+library(haven) 
+
+pulse_df = read_sas("./data/public_pulse_data.sas7bdat")
+
+pulse_df
+```
+
+    ## # A tibble: 1,087 × 7
+    ##       ID   age Sex    BDIScore_BL BDIScore_01m BDIScore_06m BDIScore_12m
+    ##    <dbl> <dbl> <chr>        <dbl>        <dbl>        <dbl>        <dbl>
+    ##  1 10003  48.0 male             7            1            2            0
+    ##  2 10015  72.5 male             6           NA           NA           NA
+    ##  3 10022  58.5 male            14            3            8           NA
+    ##  4 10026  72.7 male            20            6           18           16
+    ##  5 10035  60.4 male             4            0            1            2
+    ##  6 10050  84.7 male             2           10           12            8
+    ##  7 10078  31.3 male             4            0           NA           NA
+    ##  8 10088  56.9 male             5           NA            0            2
+    ##  9 10091  76.0 male             0            3            4            0
+    ## 10 10092  74.2 female          10            2           11            6
+    ## # ℹ 1,077 more rows
+
+``` r
+pulse_df = janitor::clean_names(pulse_df)
+```

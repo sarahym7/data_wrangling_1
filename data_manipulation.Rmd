@@ -1,0 +1,11 @@
+---
+title: "Data Manipulation"
+author: "Sarahy Martinez"
+date: "2024-09-19"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+
+```

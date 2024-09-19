@@ -85,6 +85,70 @@ relocate(litters_df, litter_number)
 ```
 
 
+## `filter` 
+Intended to remove or keep rows you are interested in retaining for subsequent analysis 
+What complicates filter instead of giving variable still need to give it a condition like true or false 
+
+```{r}
+filter(litters_df, gd0_weight < 22)
+```
+We are left with 8 rows instead of original 48
+
+```{r}
+filter(litters_df, gd0_weight >= 22)
+```
+
+```{r}
+filter(litters_df, gd_of_birth == 20) # two equals becuase not trying to make the value go into the variable, this is testing if value 20 and gd birth are equal to eachother, so will give exact value 20
+```
+
+There are also ways to negate the things we are interested in
+
+```{r}
+filter(litters_df, !(gd_of_birth == 20)) # all pups where not =20
+```
+
+Other way 
+```{r}
+filter(litters_df, gd_of_birth != 20) 
+
+```
+
+
+```{r}
+filter(litters_df, gd0_weight >= 22, gd_of_birth == 20)
+```
+
+Instead of numberic, what if we talk about something else 
+
+```{r}
+filter(litters_df, group == "Mod8")
+```
+
+```{r}
+filter(litters_df, group %in% c("Con7","Mod8")) #group equal to either Con7 OR group 8 so use percent sign+ word, says either con7 or mod 8
+```
+
+
+## `arrange`
+to put things in order 
+we don't use often bc putting things in order something you do in dataset to make more intuitive and 
+doesn't change your data analysis
+
+```{r}
+
+arrange(litters_df, pups_born_alive) #placed pups numerical order, can do alphabet by group
+```
+
+```{r}
+arrange(litters_df, pups_born_alive, gd0_weight) # first in order by pups born alive and then in order for gestational weight 
+```
+
+
+
+
+
+
 
 
 

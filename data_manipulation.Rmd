@@ -1,11 +1,23 @@
 ---
 title: "Data Manipulation"
 author: "Sarahy Martinez"
-date: "2024-09-19"
 output: github_document
 ---
 
 ```{r}
-library(tidyverse)
+library(tidyverse)  # a collection of packages that includes readr,dyplr etc
 
 ```
+
+# Load the Litters dataset 
+
+```{r}
+litters_df = read_csv("./data/FAS_litters.csv") 
+
+#now update the variables name 
+
+litters_df = janitor :: clean_names(litters_df)
+
+
+```
+

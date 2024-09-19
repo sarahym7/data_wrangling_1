@@ -1,10 +1,9 @@
 Data Manipulation
 ================
 Sarahy Martinez
-2024-09-19
 
 ``` r
-library(tidyverse)
+library(tidyverse)  # a collection of packages that includes readr,dyplr etc
 ```
 
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
@@ -17,3 +16,24 @@ library(tidyverse)
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+# Load the Litters dataset
+
+``` r
+litters_df = read_csv("./data/FAS_litters.csv") 
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (4): Group, Litter Number, GD0 weight, GD18 weight
+    ## dbl (4): GD of Birth, Pups born alive, Pups dead @ birth, Pups survive
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+#now update the variables name 
+
+litters_df = janitor :: clean_names(litters_df)
+```

@@ -18,6 +18,78 @@ litters_df = read_csv("./data/FAS_litters.csv")
 
 litters_df = janitor :: clean_names(litters_df)
 
+```
+
+## `select`
+Choose some column and not others
+
+```{r}
+
+select(litters_df, group, gd0_weight)
 
 ```
+
+
+
+```{r}
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+#lets you select a range 
+
+```
+
+
+```{r}
+# Can also specify what we want to lose 
+
+select(litters_df, -litter_number)
+
+```
+
+
+Renaming colunms
+
+```{r}
+select(litters_df, GROUP = group, LITTer_NUmber = litter_number) 
+# can use select to identift columns we want to keep and rename 
+
+```
+
+Instead of selecting and renaming, and just want to rename 
+
+```{r}
+rename( litters_df, GROUP = group, LITTer_NUmber = litter_number)
+```
+
+
+Function used specifically to help but wont use entirely 
+
+Select Helpers 
+- functions selecting columns knowing we want to keep
+
+```{r}
+select(litters_df, starts_with("gd")) #helps select everything we want to start with gd
+```
+
+
+Want to select litter number and not delete everything 
+
+```{r}
+select(litters_df, litter_number, everything())
+```
+
+Key function we want to use is select, but there are other functions that duplicate 
+
+```{r}
+relocate(litters_df, litter_number)
+```
+
+
+
+
+
+
+
+
+
 

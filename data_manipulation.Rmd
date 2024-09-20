@@ -12,7 +12,7 @@ library(tidyverse)  # a collection of packages that includes readr,dyplr etc
 # Load the Litters dataset 
 
 ```{r}
-litters_df = read_csv("./data/FAS_litters.csv") 
+litters_df = read_csv("./data/FAS_litters.csv", na = c("NA", ".", ""))
 
 #now update the variables name 
 
@@ -25,7 +25,7 @@ Choose some column and not others
 
 ```{r}
 
-select(litters_df, group, gd0_weight)
+select(litters_df,group, gd0_weight)
 
 ```
 
@@ -47,7 +47,7 @@ select(litters_df, -litter_number)
 ```
 
 
-Renaming colunms
+#Renaming colunms
 
 ```{r}
 select(litters_df, GROUP = group, LITTer_NUmber = litter_number) 
@@ -119,7 +119,7 @@ filter(litters_df, gd_of_birth != 20)
 filter(litters_df, gd0_weight >= 22, gd_of_birth == 20)
 ```
 
-Instead of numberic, what if we talk about something else 
+Instead of numeric, what if we talk about something else 
 
 ```{r}
 filter(litters_df, group == "Mod8")
@@ -128,6 +128,22 @@ filter(litters_df, group == "Mod8")
 ```{r}
 filter(litters_df, group %in% c("Con7","Mod8")) #group equal to either Con7 OR group 8 so use percent sign+ word, says either con7 or mod 8
 ```
+
+## `mutate`
+
+
+```{r}
+mutate(litters_df, wt_gain = gd18_weight - gd0_weight) 
+```
+
+```{r}
+mutate(litters_df,
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group)
+)
+```
+
+
 
 
 ## `arrange`
@@ -146,6 +162,36 @@ arrange(litters_df, pups_born_alive, gd0_weight) # first in order by pups born a
 
 
 
+## ` %>%` pipe 
+
+import -> clean names -> select variables  -> mutate -> filter
+
+```{r}
+library(dplyr)
+
+litters_data_raw =read_csv("./data/FAS_litters.csv", na = c("NA", ".", ""))
+litters_clean_names = janitor::clean_names(litters_data_raw)
+litters_data_selected = select(litters_clean_names, -pups_survive)
+litters_mutated = mutate(litters_data_selected, wt_gain = gd18_weight - gd0_weight)
+litters_mutated = litters_data_selected |>
+  mutate(wt_gain = gd18_weight - gd0_weight)
+
+litters_without_missing = drop_na(litters_mutated, gd0_weight)   # only deleting from gd0  
+```
+
+Instead USE THE PIPE OPERATOR 
+
+```{r}
+litters_df = 
+  read_csv("./data/FAS_litters.csv", na = c("NA", ".", "")) |> 
+  janitor::clean_names() |> 
+  select(-pups_survive) |> 
+  mutate(
+    wt_gain = gd18_weight - gd0_weight,
+    group = str_to_lower(group)) |> 
+  drop_na(wt_gain)
+
+```
 
 
 

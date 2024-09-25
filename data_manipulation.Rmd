@@ -51,7 +51,7 @@ select(litters_df, -litter_number)
 
 ```{r}
 select(litters_df, GROUP = group, LITTer_NUmber = litter_number) 
-# can use select to identift columns we want to keep and rename 
+# can use select to identify columns we want to keep and rename 
 
 ```
 

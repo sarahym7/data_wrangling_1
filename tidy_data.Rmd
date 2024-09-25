@@ -12,6 +12,78 @@ options(tibble.print_min = 5)
 
 ```
 
+## `pivot_longer`
+This will convert from wide format to longer 
+
+```{r}
+#this data is SAS format, so we will use the haven package 
+pulse_data = 
+  haven::read_sas("./data/public_pulse_data.sas7bdat") %>%
+  janitor::clean_names()
+```
+
+each ID we have 4 diff observation on the BDI score as well as visit, we want to end up with instead of having 4 different columns for BDI score we want for ID to have a column with visit, 1m , 6m, 12m and BDI score observed of each and repeat sex and age. There will be duplicates but thats okay. 
+
+
+Now go from wide fornmat to long format 
+pivot_longer(dataset, columns you need to take from a column by column spread out to wide that we want longer  )
+```{r}
+pulse_data_tidy = 
+  pivot_longer(
+    pulse_data, 
+    bdi_score_bl:bdi_score_12m,
+    names_to = "visit", #specify range interested in, will end up with two new columns one visit and    
+    names_prefix = "bdi_score", #specify range interested in, will end up with two new columns one visit and
+    values_to = "bdi")          #values existing in rows, new column names need to exist in new variable
+                                # so for this we do names_to, then names_prefix to assign the variable that                                  #will store these values 
+
+pulse_data_tidy
+    
+```
+bdi_score_bl unnecessary we can use mutate and strings but instead we can add name_prefix to will change the 
+prefix bdi_score_bl to just _bl
+
+
+
+rewrite, combine, and extend (to add a mutate step )
+```{r, combined }
+pulse_data = 
+  haven::read_sas("./data/public_pulse_data.sas7bdat") %>%
+  janitor::clean_names() %>% 
+  pivot_longer(
+    bdi_score_bl:bdi_score_12m,
+    names_to = "visit", 
+    names_prefix = "bdi_score_",
+    values_to = "bdi"
+    )%>%  
+relocate(id, visit) %>%               #so id and visit are next to each other in order, organized columns
+  mutate( visit = recode(visit, "bl"= "00m")) # change visit column so bl value is 00m. 
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

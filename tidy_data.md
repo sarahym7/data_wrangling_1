@@ -84,3 +84,35 @@ pulse_data =
 relocate(id, visit) %>%               #so id and visit are next to each other in order, organized columns
   mutate( visit = recode(visit, "bl"= "00m")) # change visit column so bl value is 00m. 
 ```
+
+## `pivot_wider`
+
+we use this when
+
+pivot_longer used column names that contains info that are variables and
+we need to go from wide to long
+
+We will make up data!
+
+``` r
+analysis_result =
+  tibble(
+    group = c("treatment", "treatment", "placebo", "placebo"),
+    time= c("pre", " post", "pre", "post"),
+    mean= c(4, 8, 3.5,4)
+  )
+
+#
+analysis_result %>% 
+  pivot_wider(                   #just need to tell where names and values, take values in column and make                                     columns out of that
+    names_from = "time",
+    values_from = "mean"
+    
+  )
+```
+
+    ## # A tibble: 2 × 4
+    ##   group       pre ` post`  post
+    ##   <chr>     <dbl>   <dbl> <dbl>
+    ## 1 treatment   4         8    NA
+    ## 2 placebo     3.5      NA     4

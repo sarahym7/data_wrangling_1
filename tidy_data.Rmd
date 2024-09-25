@@ -61,8 +61,29 @@ relocate(id, visit) %>%               #so id and visit are next to each other in
   
 ```
 
+## `pivot_wider` 
+we use this when 
 
+pivot_longer used  column names that contains info that are variables and we need to go from wide to long
 
+We will make up data!
+```{r}
+analysis_result =
+  tibble(
+    group = c("treatment", "treatment", "placebo", "placebo"),
+    time= c("pre", " post", "pre", "post"),
+    mean= c(4, 8, 3.5,4)
+  )
+
+#
+analysis_result %>% 
+  pivot_wider(                   #just need to tell where names and values, take values in column and make                                     columns out of that
+    names_from = "time",
+    values_from = "mean"
+    
+  )
+
+```
 
 
 

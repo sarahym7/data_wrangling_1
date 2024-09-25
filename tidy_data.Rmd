@@ -1,0 +1,22 @@
+---
+title: "Tidy_data"
+author: "Sarahy Martinez"
+date: "2024-09-25"
+output: github_document
+---
+
+
+```{r}
+library(tidyverse)
+options(tibble.print_min = 5)
+
+```
+
+
+
+
+
+
+
+
+

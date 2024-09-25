@@ -116,3 +116,42 @@ analysis_result %>%
     ##   <chr>     <dbl>   <dbl> <dbl>
     ## 1 treatment   4         8    NA
     ## 2 placebo     3.5      NA     4
+
+What happens if we have data in multiple tables and we want to stack the
+rows up?
+
+## Binding Rows
+
+using LOTR data
+
+Step 1: Import each table, read in different subs by reading in
+different tables in excel
+
+``` r
+fellowship_ring = 
+  readxl:: read_excel("./data/LotR_Words.xlsx", range = "B3:D6") %>% 
+  # this alone is an issue, missing movie title, so mutate
+mutate(movie = "fellowship_ring") # when run here not at all tidy , but read in remaining data sets
+
+two_towers = 
+  readxl:: read_excel("./data/LotR_Words.xlsx", range = "F3:H6") %>% 
+mutate(movie = "two_towers") 
+
+return_king = 
+  readxl:: read_excel("./data/LotR_Words.xlsx", range = "J3:L6") %>% 
+mutate(movie = "return_king") 
+```
+
+Bind all rows together
+
+``` r
+lotr_tidy = 
+  bind_rows(fellowship_ring, two_towers, return_king) %>%  #combined but not tidy, need to clean names etc.
+  janitor::clean_names() %>% 
+  relocate(movie) %>% 
+  pivot_longer(
+    female:male,
+    names_to = "gender",
+    values_to = "words"  #assigned values that were gender race to words 
+  )
+```

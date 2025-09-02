@@ -72,13 +72,13 @@ can add name_prefix to will change the prefix bdi_score_bl to just \_bl
 rewrite, combine, and extend (to add a mutate step )
 
 ``` r
-pulse_data = 
+pulse_data_tidy = 
   haven::read_sas("./data/public_pulse_data.sas7bdat") %>%
   janitor::clean_names() %>% 
   pivot_longer(
     bdi_score_bl:bdi_score_12m,
     names_to = "visit", 
-    names_prefix = "bdi_score_",
+    names_prefix = "bdi_score_", #names_prefix removes the prefix of the front
     values_to = "bdi"
     )%>%  
 relocate(id, visit) %>%               #so id and visit are next to each other in order, organized columns
@@ -101,12 +101,14 @@ analysis_result =
     time= c("pre", " post", "pre", "post"),
     mean= c(4, 8, 3.5,4)
   )
+```
 
+``` r
 #
 analysis_result %>% 
   pivot_wider(                   #just need to tell where names and values, take values in column and make                                     columns out of that
-    names_from = "time",
-    values_from = "mean"
+    names_from = "time",   #columns (xs)
+    values_from = "mean"  #values are now inserted to the columns
     
   )
 ```
@@ -177,7 +179,7 @@ pups_df=
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-litters_df= 
+litters_df = 
  read_csv("./data/FAS_litters.csv")
 ```
 
@@ -212,7 +214,7 @@ pups_df=
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-litters_df= 
+litters_df = 
  read_csv("./data/FAS_litters.csv") %>% 
   janitor::clean_names() %>% 
   relocate(litter_number) %>% 

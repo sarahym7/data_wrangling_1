@@ -174,7 +174,7 @@ litters_df = read_csv("./data/FAS_litters.csv", skip=10)
     ## • `8` -> `8...8`
 
 noticed that we have 39x8 instead of 49x8, its skipped the first 10 rows
-and taken whatever the first column as varibales names so instead we’ll
+and taken whatever the first column as variables names so instead we’ll
 do
 
 ``` r
@@ -259,7 +259,7 @@ mlb_df
 
 dataset is already good with variable names
 
-FYI there are excel specific optionsin the read excel help file sheet =
+FYI there are excel specific options in the read excel help file sheet =
 NULL, range = NULL, you have to specify which sheet you want to draw
 information from and specify the range of values you want to import from
 the columns

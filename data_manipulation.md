@@ -86,7 +86,7 @@ select(litters_df, group, gd0_weight:gd_of_birth)
 
 ``` r
 # Can also specify what we want to lose 
-
+, -
 select(litters_df, -litter_number)
 ```
 
